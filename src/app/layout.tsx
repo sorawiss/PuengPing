@@ -3,7 +3,7 @@ import { AppSidebar, MobileNav } from "@/components/app-sidebar";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CareKey Dashboard",
+  title: "PuengPing",
   description: "ระบบช่วยติดตามและเชื่อมต่อบริการสำหรับผู้ใช้บริการคนไร้บ้าน",
 };
 
