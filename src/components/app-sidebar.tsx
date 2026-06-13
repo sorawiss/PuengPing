@@ -4,6 +4,7 @@ const navItems = [
   { href: "/", label: "ภาพรวม" },
   { href: "/people", label: "ผู้ใช้บริการ" },
   { href: "/services", label: "ความต้องการบริการ" },
+  { href: "/ai", label: "ถาม AI" },
   { href: "/about-data", label: "ข้อมูลจำลอง" },
 ];
 

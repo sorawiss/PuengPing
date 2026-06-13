@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="th" className="h-full antialiased">
+    <html lang="th" className="h-full font-sans antialiased">
       <body className="min-h-full bg-[var(--background)] text-[var(--foreground)]">
         <div className="min-h-screen lg:flex">
           <AppSidebar />
