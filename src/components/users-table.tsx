@@ -67,7 +67,7 @@ export function UsersTable({ users }: { users: HomelessUser[] }) {
           <input
             className="min-h-11 rounded-md border border-slate-300 px-3 text-sm outline-none focus:border-[var(--ci-blue)] focus:ring-2 focus:ring-sky-100"
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="ค้นหาชื่อ พื้นที่ รหัส หรือความต้องการ"
+            placeholder="ค้นหา เช่น ทาสี แข็งแรง พร้อมเริ่มงาน หรือพื้นที่"
             value={query}
           />
           <Select label="พื้นที่" onChange={setArea} options={areas} value={area} />
@@ -132,7 +132,11 @@ export function UsersTable({ users }: { users: HomelessUser[] }) {
 
           <div className="grid gap-3 lg:hidden">
             {visibleUsers.map((user) => (
-              <Link className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm" href={`/people/${user.id}`} key={user.id}>
+              <Link
+                className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm"
+                href={`/people/${user.id}`}
+                key={user.id}
+              >
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="font-semibold text-slate-950">{user.nickname}</p>
@@ -142,7 +146,7 @@ export function UsersTable({ users }: { users: HomelessUser[] }) {
                   </div>
                   <Badge className={riskBadgeClass(user.riskLevel)}>{user.riskLevel}</Badge>
                 </div>
-                <p className="mt-3 text-sm text-slate-600">{user.mainNeed} · {user.followUpStatus}</p>
+                <p className="mt-3 text-sm text-slate-600">{user.caseSummary}</p>
               </Link>
             ))}
           </div>

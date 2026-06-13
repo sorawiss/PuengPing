@@ -6,18 +6,38 @@ import { needBadgeClass, riskBadgeClass } from "@/lib/format";
 import type { MainNeed } from "@/lib/types";
 
 const serviceGroups: Array<{ need: MainNeed; title: string; description: string }> = [
-  { need: "สุขภาพ", title: "สุขภาพ", description: "ผู้ใช้บริการที่ควรได้รับการตรวจ ประเมิน หรือส่งต่อคลินิกชุมชน" },
-  { need: "ที่พัก", title: "ที่พัก", description: "รายการที่ต้องประสานที่พักชั่วคราวหรือพื้นที่ปลอดภัย" },
-  { need: "เอกสาร/สิทธิ", title: "เอกสารและสวัสดิการ", description: "รายการที่ต้องตรวจสอบเอกสาร สิทธิรักษา หรือสวัสดิการพื้นฐาน" },
-  { need: "งาน/รายได้", title: "การจ้างงาน", description: "ผู้ใช้บริการที่เริ่มประเมินความพร้อมด้านงานและรายได้" },
-  { need: "สุขภาพใจ", title: "สุขภาพใจ/สังคม", description: "รายการที่ควรติดตามด้านสภาพใจ ความสัมพันธ์ หรือการสนับสนุนทางสังคม" },
+  {
+    need: "สุขภาพ",
+    title: "สุขภาพ",
+    description: "ผู้ใช้บริการที่ควรได้รับการตรวจ ประเมิน หรือส่งต่อคลินิกชุมชน",
+  },
+  {
+    need: "ที่พัก",
+    title: "ที่พัก",
+    description: "รายการที่ต้องประสานที่พักชั่วคราวหรือพื้นที่ปลอดภัย",
+  },
+  {
+    need: "เอกสาร/สิทธิ",
+    title: "เอกสารและสวัสดิการ",
+    description: "รายการที่ต้องตรวจสอบเอกสาร สิทธิรักษา หรือสวัสดิการพื้นฐาน",
+  },
+  {
+    need: "งาน/รายได้",
+    title: "การจ้างงาน",
+    description: "ผู้ใช้บริการที่เริ่มประเมินความพร้อมด้านงาน รายได้ และทักษะที่ใช้จับคู่งานได้",
+  },
+  {
+    need: "สุขภาพใจ",
+    title: "สุขภาพใจ/สังคม",
+    description: "รายการที่ควรติดตามด้านสภาพใจ ความสัมพันธ์ หรือการสนับสนุนทางสังคม",
+  },
 ];
 
 export default function ServicesPage() {
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <DashboardHeader
-        subtitle="จัดกลุ่มผู้ใช้บริการตามความต้องการ เพื่อช่วยทีมภาคสนามวางแผนส่งต่อได้เร็วขึ้น"
+        subtitle="จัดกลุ่มผู้ใช้บริการตามความต้องการ เพื่อช่วยทีมภาคสนามวางแผนส่งต่อและค้นหาด้วย AI ได้เร็วขึ้น"
         title="ความต้องการบริการ"
       />
 
@@ -45,7 +65,11 @@ export default function ServicesPage() {
 
               <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
                 {users.slice(0, 9).map((user) => (
-                  <Link className="rounded-md border border-slate-200 p-4 transition hover:bg-slate-50" href={`/people/${user.id}`} key={user.id}>
+                  <Link
+                    className="rounded-md border border-slate-200 p-4 transition hover:bg-slate-50"
+                    href={`/people/${user.id}`}
+                    key={user.id}
+                  >
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <p className="font-semibold text-slate-950">{user.nickname}</p>
@@ -55,7 +79,7 @@ export default function ServicesPage() {
                       </div>
                       <Badge className={riskBadgeClass(user.riskLevel)}>{user.riskLevel}</Badge>
                     </div>
-                    <p className="mt-3 text-sm text-slate-600">{user.followUpStatus}</p>
+                    <p className="mt-3 text-sm leading-6 text-slate-600">{user.caseSummary}</p>
                   </Link>
                 ))}
               </div>

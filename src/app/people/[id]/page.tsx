@@ -27,7 +27,10 @@ export default async function PersonDetailPage({ params }: { params: Promise<{ i
     <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <DashboardHeader
         action={
-          <Link className="rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm" href="/people">
+          <Link
+            className="rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm"
+            href="/people"
+          >
             กลับไปหน้ารายชื่อ
           </Link>
         }
@@ -47,8 +50,10 @@ export default async function PersonDetailPage({ params }: { params: Promise<{ i
               <Info label="เพศ" value={user.gender} />
               <Info label="พื้นที่พบ" value={user.area} />
               <Info label="ลักษณะพื้นที่" value={user.areaType} />
+              <Info label="เปิดเคส" value={user.caseOpenedDate} />
+              <Info label="ติดต่อล่าสุด" value={user.lastContactDate} />
               <Info label="ระยะเวลาไร้ที่พัก" value={user.homelessDuration} />
-              <Info label="เหตุผลหลัก" value={user.mainReason} />
+              <Info label="จุดที่ติดต่อได้" value={user.contactPoint} />
             </dl>
           </section>
 
@@ -63,33 +68,38 @@ export default async function PersonDetailPage({ params }: { params: Promise<{ i
               ))}
             </div>
           </section>
+
+          <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 className="text-lg font-semibold text-slate-950">ข้อมูลสุขภาพและข้อจำกัด</h2>
+            <div className="mt-4 space-y-4 text-sm leading-6 text-slate-700">
+              <TextBlock label="สภาพร่างกาย" value={user.physicalCondition} />
+              <TextBlock label="สรุปสุขภาพ" value={user.healthSummary} />
+              <TextBlock label="ข้อจำกัดในการทำงาน" value={user.workConstraints} />
+            </div>
+          </section>
         </div>
 
         <div className="space-y-6">
           <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-950">ความต้องการบริการ</h2>
-            <div className="mt-4 grid gap-2 sm:grid-cols-2">
-              {[
-                ["สุขภาพ", user.healthNeed],
-                ["ที่พัก", user.shelterNeed],
-                ["เอกสาร/สิทธิ", user.documentNeed],
-                ["งาน/รายได้", user.employmentNeed],
-                ["สุขภาพใจ/สังคม", user.mentalHealthNeed],
-                ["อาหาร/ของใช้จำเป็น", user.foodNeed],
-              ].map(([label, active]) => (
-                <div className="flex items-center justify-between rounded-md border border-slate-200 px-3 py-2 text-sm" key={String(label)}>
-                  <span>{label}</span>
-                  <span className={active ? "font-semibold text-[var(--ci-green)]" : "text-slate-400"}>
-                    {active ? "ต้องการ" : "ยังไม่พบ"}
-                  </span>
-                </div>
-              ))}
+            <h2 className="text-lg font-semibold text-slate-950">ข้อมูลสำหรับจับคู่งานและ AI Search</h2>
+            <div className="mt-4 space-y-5">
+              <ChipGroup label="ทักษะ" values={user.skills} />
+              <ChipGroup label="ประสบการณ์ทำงาน" values={user.workExperience} />
+              <ChipGroup label="งานที่สนใจ" values={user.employmentPreference} />
+              <TextBlock label="เวลาที่พร้อม" value={user.availability} />
+              <ChipGroup label="คำค้นสำหรับ AI" values={user.aiSearchTags} />
             </div>
           </section>
 
           <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-950">หมายเหตุจากทีมภาคสนาม</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-600">{user.notes}</p>
+            <h2 className="text-lg font-semibold text-slate-950">บันทึกเจ้าหน้าที่</h2>
+            <div className="mt-4 space-y-4 text-sm leading-6 text-slate-700">
+              <TextBlock label="เหตุผลหลักของภาวะไร้ที่พัก" value={user.mainReason} />
+              <TextBlock label="เอกสาร/สิทธิ" value={user.documentSummary} />
+              <TextBlock label="เครือข่ายสนับสนุน" value={user.socialSupportSummary} />
+              <TextBlock label="ข้อสังเกตจากทีมภาคสนาม" value={user.officerObservation} />
+              <TextBlock label="สรุปเคสสำหรับประสานงาน" value={user.caseSummary} />
+            </div>
           </section>
 
           <section className="rounded-lg border border-[var(--ci-green)] bg-emerald-50 p-5">
@@ -114,6 +124,33 @@ function Info({ label, value }: { label: string; value: string }) {
     <div>
       <dt className="text-slate-500">{label}</dt>
       <dd className="mt-1 font-semibold text-slate-950">{value}</dd>
+    </div>
+  );
+}
+
+function TextBlock({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="font-semibold text-slate-950">{label}</p>
+      <p className="mt-1 text-slate-700">{value}</p>
+    </div>
+  );
+}
+
+function ChipGroup({ label, values }: { label: string; values: string[] }) {
+  return (
+    <div>
+      <p className="text-sm font-semibold text-slate-950">{label}</p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {values.map((value) => (
+          <span
+            className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700"
+            key={value}
+          >
+            {value}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
