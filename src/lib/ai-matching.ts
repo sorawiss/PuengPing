@@ -16,6 +16,14 @@ export type AiMatchResponse = {
   candidates: AiCandidate[];
 };
 
+export type TyphoonSelection = {
+  answer?: unknown;
+  selectedIds?: unknown;
+  reasoningById?: unknown;
+  cautionById?: unknown;
+  nextStepById?: unknown;
+};
+
 type ScoredUser = {
   user: HomelessUser;
   score: number;
@@ -93,31 +101,34 @@ export function buildCandidatePromptData(candidates: AiCandidate[]) {
     .filter(Boolean);
 }
 
-export function normalizeTyphoonCandidates(
-  typhoonCandidates: Partial<AiCandidate>[] | undefined,
+export function normalizeTyphoonSelection(
+  selection: TyphoonSelection,
   fallbackCandidates: AiCandidate[],
 ) {
-  if (!Array.isArray(typhoonCandidates)) return fallbackCandidates;
+  if (!Array.isArray(selection.selectedIds)) return fallbackCandidates;
 
   const fallbackById = new Map(fallbackCandidates.map((candidate) => [candidate.id, candidate]));
+  const reasoningById = normalizeStringRecord(selection.reasoningById);
+  const cautionById = normalizeStringRecord(selection.cautionById);
+  const nextStepById = normalizeStringRecord(selection.nextStepById);
 
-  return typhoonCandidates
-    .map((candidate) => {
-      if (!candidate.id) return null;
-      const fallback = fallbackById.get(candidate.id);
+  return selection.selectedIds
+    .map((id) => {
+      if (typeof id !== "string") return null;
+      const fallback = fallbackById.get(id);
       if (!fallback) return null;
+      const reason = reasoningById[id]?.trim();
+      const caution = cautionById[id]?.trim();
+      const nextStep = nextStepById[id]?.trim();
 
       return {
         id: fallback.id,
         careKeyId: fallback.careKeyId,
         nickname: fallback.nickname,
-        fitScore: clampScore(Number(candidate.fitScore) || fallback.fitScore),
-        reasons: normalizeStringArray(candidate.reasons, fallback.reasons),
-        cautions: normalizeStringArray(candidate.cautions, fallback.cautions),
-        nextStep:
-          typeof candidate.nextStep === "string" && candidate.nextStep.trim()
-            ? candidate.nextStep.trim()
-            : fallback.nextStep,
+        fitScore: fallback.fitScore,
+        reasons: reason ? [reason] : fallback.reasons,
+        cautions: caution ? [caution] : fallback.cautions,
+        nextStep: nextStep || fallback.nextStep,
       };
     })
     .filter((candidate): candidate is AiCandidate => Boolean(candidate));
@@ -223,8 +234,10 @@ function clampScore(score: number) {
   return Math.max(0, Math.min(100, Math.round(score)));
 }
 
-function normalizeStringArray(value: unknown, fallback: string[]) {
-  if (!Array.isArray(value)) return fallback;
-  const strings = value.filter((item): item is string => typeof item === "string" && item.trim().length > 0);
-  return strings.length ? strings.slice(0, 5) : fallback;
+function normalizeStringRecord(value: unknown) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  return Object.entries(value).reduce<Record<string, string>>((result, [key, item]) => {
+    if (typeof item === "string") result[key] = item;
+    return result;
+  }, {});
 }
