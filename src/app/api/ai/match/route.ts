@@ -27,6 +27,12 @@ type TyphoonResponse = {
 };
 
 export async function POST(request: Request) {
+  const requestId = crypto.randomUUID();
+
+  console.log("\n=================== ROUTE START ===================");
+  console.log("[ROUTE] Request ID:", requestId);
+  console.log("[ROUTE] Time:", new Date().toISOString());
+  
   let body: MatchRequest;
 
   try {
@@ -72,7 +78,7 @@ export async function POST(request: Request) {
 
 async function callTyphoon(question: string, localCandidates: AiMatchResponse["candidates"], apiKey: string) {
   const baseUrl = (process.env.TYPHOON_API_BASE_URL || DEFAULT_BASE_URL).replace(/\/$/, "");
-  
+
   const requestBody = {
     model: MODEL,
     temperature: 0.2,
@@ -137,7 +143,7 @@ async function callTyphoon(question: string, localCandidates: AiMatchResponse["c
 
   const data = (await response.json()) as TyphoonResponse;
   const content = data.choices?.[0]?.message?.content;
-  
+
   if (data.usage) {
     console.log(`[AI] Tokens Used: ${data.usage.total_tokens} (Prompt: ${data.usage.prompt_tokens}, Completion: ${data.usage.completion_tokens})`);
   }
@@ -152,7 +158,7 @@ async function callTyphoon(question: string, localCandidates: AiMatchResponse["c
   console.log(content);
 
   const parsed = parseJsonContent(content);
-  
+
   console.log("[AI] Parsed Content:");
   console.log(JSON.stringify(parsed, null, 2));
   console.log("=================== AI MATCH END =====================\n");
