@@ -137,7 +137,7 @@ export function AiMatchPanel() {
                         <div>
                           <p className="text-sm font-semibold text-[var(--ci-blue)]">อันดับ {index + 1}</p>
                           <h3 className="mt-1 text-xl font-semibold text-slate-950">
-                            {user.nickname} <span className="text-sm font-medium text-slate-500">{user.careKeyId}</span>
+                            {user.nickname} <span className="text-sm font-medium text-slate-500">{user.puengpingId}</span>
                           </h3>
                           <p className="mt-1 text-sm text-slate-600">
                             {user.age} ปี · {user.area} · คะแนน {candidate.fitScore}/100
@@ -183,7 +183,7 @@ export function AiMatchPanel() {
         <PureMultimodalInput
           attachments={attachments}
           canSend
-          chatId="carekey-ai-match"
+          chatId="puengping-ai-match"
           className="mx-auto"
           isGenerating={isLoading}
           messages={messages}

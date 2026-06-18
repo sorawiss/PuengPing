@@ -16,7 +16,7 @@ export function AppSidebar() {
           CK
         </span>
         <span>
-          <span className="block text-base font-semibold text-slate-950">CareKey</span>
+          <span className="block text-base font-semibold text-slate-950">puengping</span>
           <span className="block text-xs font-medium text-slate-500">Prototype</span>
         </span>
       </Link>

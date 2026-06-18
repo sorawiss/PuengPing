@@ -78,7 +78,7 @@ export function searchUsers(users: HomelessUser[], query: string) {
     [
       user.nickname,
       user.area,
-      user.careKeyId,
+      user.puengpingId,
       user.mainNeed,
       user.assignedWorker,
       user.physicalCondition,

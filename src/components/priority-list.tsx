@@ -28,7 +28,7 @@ export function PriorityList({ users }: { users: HomelessUser[] }) {
           >
             <div>
               <p className="font-semibold text-slate-950">
-                {user.nickname} <span className="text-sm font-medium text-slate-500">{user.careKeyId}</span>
+                {user.nickname} <span className="text-sm font-medium text-slate-500">{user.puengpingId}</span>
               </p>
               <p className="mt-1 text-sm text-slate-600">
                 {user.area} · {user.shelterStatus}

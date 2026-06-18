@@ -34,7 +34,7 @@ export default async function PersonDetailPage({ params }: { params: Promise<{ i
             กลับไปหน้ารายชื่อ
           </Link>
         }
-        subtitle={`${user.careKeyId} · ${user.area} · ผู้ดูแล ${user.assignedWorker}`}
+        subtitle={`${user.puengpingId} · ${user.area} · ผู้ดูแล ${user.assignedWorker}`}
         title={user.nickname}
       />
 

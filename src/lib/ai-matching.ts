@@ -3,7 +3,7 @@ import type { HomelessUser } from "@/lib/types";
 
 export type AiCandidate = {
   id: string;
-  careKeyId: string;
+  puengpingId: string;
   nickname: string;
   fitScore: number;
   reasons: string[];
@@ -77,7 +77,7 @@ export function buildCandidatePromptData(candidates: AiCandidate[]) {
 
       return {
         id: user.id,
-        careKeyId: user.careKeyId,
+        puengpingId: user.puengpingId,
         nickname: user.nickname,
         age: user.age,
         area: user.area,
@@ -123,7 +123,7 @@ export function normalizeTyphoonSelection(
 
       return {
         id: fallback.id,
-        careKeyId: fallback.careKeyId,
+        puengpingId: fallback.puengpingId,
         nickname: fallback.nickname,
         fitScore: fallback.fitScore,
         reasons: reason ? [reason] : fallback.reasons,
@@ -221,7 +221,7 @@ function toCandidate(user: HomelessUser, score: number, matchedTerms: string[]):
 
   return {
     id: user.id,
-    careKeyId: user.careKeyId,
+    puengpingId: user.puengpingId,
     nickname: user.nickname,
     fitScore: clampScore(score),
     reasons,

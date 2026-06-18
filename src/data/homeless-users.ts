@@ -3,7 +3,7 @@ import type { HomelessUser } from "@/lib/types";
 export const homelessUsers: HomelessUser[] = [
   {
     id: "u-001",
-    careKeyId: "CK-0001",
+    puengpingId: "CK-0001",
     nickname: "ลุงชัย",
     age: 54,
     gender: "ชาย",
@@ -51,7 +51,7 @@ export const homelessUsers: HomelessUser[] = [
       {
         date: "2026-06-12",
         service: "ประเมินความพร้อมงานรายวัน",
-        organization: "ทีมภาคสนาม CareKey",
+        organization: "ทีมภาคสนาม puengping",
         status: "ติดตามต่อ",
         note: "บันทึกทักษะทาสีและข้อจำกัดเรื่องเวลาเดินทาง",
       },
@@ -59,7 +59,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-002",
-    careKeyId: "CK-0002",
+    puengpingId: "CK-0002",
     nickname: "ป้าอร",
     age: 61,
     gender: "หญิง",
@@ -115,7 +115,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-003",
-    careKeyId: "CK-0003",
+    puengpingId: "CK-0003",
     nickname: "ต้น",
     age: 29,
     gender: "ชาย",
@@ -164,7 +164,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-004",
-    careKeyId: "CK-0004",
+    puengpingId: "CK-0004",
     nickname: "มะลิ",
     age: 37,
     gender: "หญิง",
@@ -220,7 +220,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-005",
-    careKeyId: "CK-0005",
+    puengpingId: "CK-0005",
     nickname: "แดง",
     age: 46,
     gender: "ชาย",
@@ -269,7 +269,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-006",
-    careKeyId: "CK-0006",
+    puengpingId: "CK-0006",
     nickname: "แก้ว",
     age: 33,
     gender: "หญิง",
@@ -318,7 +318,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-007",
-    careKeyId: "CK-0007",
+    puengpingId: "CK-0007",
     nickname: "วิทย์",
     age: 42,
     gender: "ชาย",
@@ -367,7 +367,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-008",
-    careKeyId: "CK-0008",
+    puengpingId: "CK-0008",
     nickname: "บี",
     age: 24,
     gender: "อื่น ๆ",
@@ -416,7 +416,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-009",
-    careKeyId: "CK-0009",
+    puengpingId: "CK-0009",
     nickname: "เอก",
     age: 39,
     gender: "ชาย",
@@ -465,7 +465,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-010",
-    careKeyId: "CK-0010",
+    puengpingId: "CK-0010",
     nickname: "น้อย",
     age: 52,
     gender: "หญิง",
@@ -514,7 +514,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-011",
-    careKeyId: "CK-0011",
+    puengpingId: "CK-0011",
     nickname: "หนุ่ม",
     age: 31,
     gender: "ชาย",
@@ -563,7 +563,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-012",
-    careKeyId: "CK-0012",
+    puengpingId: "CK-0012",
     nickname: "แอน",
     age: 27,
     gender: "หญิง",
@@ -612,7 +612,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-013",
-    careKeyId: "CK-0013",
+    puengpingId: "CK-0013",
     nickname: "พร",
     age: 49,
     gender: "หญิง",
@@ -661,7 +661,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-014",
-    careKeyId: "CK-0014",
+    puengpingId: "CK-0014",
     nickname: "เสก",
     age: 44,
     gender: "ชาย",
@@ -710,7 +710,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-015",
-    careKeyId: "CK-0015",
+    puengpingId: "CK-0015",
     nickname: "ดา",
     age: 35,
     gender: "หญิง",
@@ -759,7 +759,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-016",
-    careKeyId: "CK-0016",
+    puengpingId: "CK-0016",
     nickname: "ป้อม",
     age: 58,
     gender: "ชาย",
@@ -808,7 +808,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-017",
-    careKeyId: "CK-0017",
+    puengpingId: "CK-0017",
     nickname: "แสง",
     age: 41,
     gender: "ชาย",
@@ -857,7 +857,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-018",
-    careKeyId: "CK-0018",
+    puengpingId: "CK-0018",
     nickname: "จอย",
     age: 30,
     gender: "หญิง",
@@ -906,7 +906,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-019",
-    careKeyId: "CK-0019",
+    puengpingId: "CK-0019",
     nickname: "บุญ",
     age: 63,
     gender: "ชาย",
@@ -955,7 +955,7 @@ export const homelessUsers: HomelessUser[] = [
   },
   {
     id: "u-020",
-    careKeyId: "CK-0020",
+    puengpingId: "CK-0020",
     nickname: "สมชาย",
     age: 48,
     gender: "ชาย",

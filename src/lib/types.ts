@@ -63,7 +63,7 @@ export type Referral = {
 
 export type HomelessUser = {
   id: string;
-  careKeyId: string;
+  puengpingId: string;
   nickname: string;
   age: number;
   gender: Gender;

@@ -32,7 +32,7 @@ export async function POST(request: Request) {
   console.log("\n=================== ROUTE START ===================");
   console.log("[ROUTE] Request ID:", requestId);
   console.log("[ROUTE] Time:", new Date().toISOString());
-  
+
   let body: MatchRequest;
 
   try {
@@ -87,12 +87,12 @@ async function callTyphoon(question: string, localCandidates: AiMatchResponse["c
       {
         role: "system",
         content:
-          "คุณคือผู้ช่วย CareKey สำหรับเจ้าหน้าที่ภาคสนาม ใช้เฉพาะข้อมูลผู้ใช้บริการจำลองที่ให้มาเท่านั้น ห้ามแต่งชื่อหรือข้อมูลใหม่ แนะนำอย่างเคารพ ไม่เปิดเผยรายละเอียดอ่อนไหวเกินจำเป็น พิจารณาทักษะ ประสบการณ์ สุขภาพ อายุ ความพร้อม เวลา ข้อจำกัด เอกสาร และระดับเร่งด่วน ตอบเป็น JSON เท่านั้น",
+          "คุณคือผู้ช่วย puengping สำหรับเจ้าหน้าที่ภาคสนาม ใช้เฉพาะข้อมูลผู้ใช้บริการจำลองที่ให้มาเท่านั้น ห้ามแต่งชื่อหรือข้อมูลใหม่ แนะนำอย่างเคารพ ไม่เปิดเผยรายละเอียดอ่อนไหวเกินจำเป็น พิจารณาทักษะ ประสบการณ์ สุขภาพ อายุ ความพร้อม เวลา ข้อจำกัด เอกสาร และระดับเร่งด่วน ตอบเป็น JSON เท่านั้น",
       },
       {
         role: "system",
         content:
-          "Return only these JSON fields: answer, selectedIds, reasoningById, cautionById, nextStepById. Do not return candidate objects, nickname, careKeyId, profile fields, or card data. selectedIds must contain only ids from the provided candidates.",
+          "Return only these JSON fields: answer, selectedIds, reasoningById, cautionById, nextStepById. Do not return candidate objects, nickname, puengpingId, profile fields, or card data. selectedIds must contain only ids from the provided candidates.",
       },
       {
         role: "user",

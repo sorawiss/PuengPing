@@ -74,7 +74,7 @@ export default function ServicesPage() {
                       <div>
                         <p className="font-semibold text-slate-950">{user.nickname}</p>
                         <p className="mt-1 text-sm text-slate-500">
-                          {user.careKeyId} · {user.area}
+                          {user.puengpingId} · {user.area}
                         </p>
                       </div>
                       <Badge className={riskBadgeClass(user.riskLevel)}>{user.riskLevel}</Badge>

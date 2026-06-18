@@ -28,7 +28,7 @@ export default function Home() {
           </div>
         }
         subtitle="ระบบช่วยติดตามและเชื่อมต่อบริการสำหรับผู้ใช้บริการคนไร้บ้าน"
-        title="CareKey Dashboard"
+        title="puengping Dashboard"
       />
 
       <section className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">

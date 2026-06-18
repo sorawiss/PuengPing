@@ -107,7 +107,7 @@ export function UsersTable({ users }: { users: HomelessUser[] }) {
               <tbody className="divide-y divide-slate-100">
                 {visibleUsers.map((user) => (
                   <tr className="align-top hover:bg-slate-50" key={user.id}>
-                    <td className="px-4 py-3 font-medium text-slate-950">{user.careKeyId}</td>
+                    <td className="px-4 py-3 font-medium text-slate-950">{user.puengpingId}</td>
                     <td className="px-4 py-3">{user.nickname}</td>
                     <td className="px-4 py-3">{user.age}</td>
                     <td className="px-4 py-3">{user.area}</td>
@@ -141,7 +141,7 @@ export function UsersTable({ users }: { users: HomelessUser[] }) {
                   <div>
                     <p className="font-semibold text-slate-950">{user.nickname}</p>
                     <p className="mt-1 text-sm text-slate-500">
-                      {user.careKeyId} · {user.age} ปี · {user.area}
+                      {user.puengpingId} · {user.age} ปี · {user.area}
                     </p>
                   </div>
                   <Badge className={riskBadgeClass(user.riskLevel)}>{user.riskLevel}</Badge>
