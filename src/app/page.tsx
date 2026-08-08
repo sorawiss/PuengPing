@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DashboardHeader } from "@/components/dashboard-header";
-import { Badge, PriorityList } from "@/components/priority-list";
+import { PriorityList } from "@/components/priority-list";
 import { StatCard } from "@/components/stat-card";
 import {
   getEmploymentReadyUsers,
@@ -13,6 +13,9 @@ import {
   getUsersNeedingShelter,
   getUsersWithDocumentIssues,
 } from "@/lib/mock-utils";
+import { OverviewChart } from "@/components/overview-chart";
+import { NeedsChart } from "@/components/needs-chart";
+import { RiskChart } from "@/components/risk-chart";
 
 export default function Home() {
   const needCounts = getUsersByMainNeed();
@@ -40,36 +43,24 @@ export default function Home() {
         <StatCard detail="ควรติดตามก่อนรายการอื่น" href="/people" label="ต้องติดตามเร่งด่วน" value={getUrgentUsers().length} />
       </section>
 
+      <section className="mt-6 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 className="text-lg font-semibold text-slate-950">แนวโน้มผู้เข้ารับบริการ (พ.ศ. 2569)</h2>
+        <OverviewChart />
+      </section>
+
       <section className="mt-6 grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
         <PriorityList users={getUrgentUsers()} />
 
         <div className="space-y-6">
           <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
             <h2 className="text-lg font-semibold text-slate-950">สรุปความต้องการบริการ</h2>
-            <div className="mt-4 space-y-3">
-              {Object.entries(needCounts).map(([need, count]) => (
-                <div className="grid grid-cols-[120px_1fr_40px] items-center gap-3 text-sm" key={need}>
-                  <span className="font-medium text-slate-700">{need}</span>
-                  <span className="h-2 overflow-hidden rounded-full bg-slate-100">
-                    <span
-                      className="block h-full rounded-full bg-[var(--ci-blue)]"
-                      style={{ width: `${(count / getTotalUsers()) * 100}%` }}
-                    />
-                  </span>
-                  <span className="text-right font-semibold text-slate-950">{count}</span>
-                </div>
-              ))}
-            </div>
+            <NeedsChart data={needCounts} />
           </section>
 
           <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
             <h2 className="text-lg font-semibold text-slate-950">ระดับความเร่งด่วน</h2>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {Object.entries(riskCounts).map(([risk, count]) => (
-                <Badge className="border-slate-200 bg-slate-50 text-slate-700" key={risk}>
-                  {risk} {count}
-                </Badge>
-              ))}
+            <div className="mt-4">
+              <RiskChart data={riskCounts} />
             </div>
           </section>
         </div>
