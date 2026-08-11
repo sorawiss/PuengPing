@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import ReactMarkdown, { type Components } from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { PureMultimodalInput } from "@/components/ui/multimodal-ai-chat-input";
 
 type Attachment = {
@@ -22,6 +24,39 @@ type ChatResponse = {
   error?: string;
 };
 
+const markdownComponents: Components = {
+  h1: ({ children }) => <h1 className="mb-3 mt-5 text-xl font-bold text-slate-950 first:mt-0">{children}</h1>,
+  h2: ({ children }) => <h2 className="mb-2 mt-5 text-lg font-semibold text-slate-950 first:mt-0">{children}</h2>,
+  h3: ({ children }) => <h3 className="mb-2 mt-4 text-base font-semibold text-slate-950 first:mt-0">{children}</h3>,
+  p: ({ children }) => <p className="my-3 text-sm leading-7 first:mt-0 last:mb-0">{children}</p>,
+  ul: ({ children }) => <ul className="my-3 list-disc space-y-1 pl-6 text-sm leading-7">{children}</ul>,
+  ol: ({ children }) => <ol className="my-3 list-decimal space-y-1 pl-6 text-sm leading-7">{children}</ol>,
+  li: ({ children }) => <li className="pl-1">{children}</li>,
+  blockquote: ({ children }) => (
+    <blockquote className="my-4 border-l-4 border-[var(--ci-green)] bg-emerald-50 px-4 py-2 text-slate-700">
+      {children}
+    </blockquote>
+  ),
+  a: ({ children, href }) => (
+    <a className="font-medium text-[var(--ci-blue)] underline underline-offset-2" href={href} rel="noreferrer" target="_blank">
+      {children}
+    </a>
+  ),
+  code: ({ children, className }) => (
+    <code className={`${className ?? ""} rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[0.85em] text-slate-900`}>
+      {children}
+    </code>
+  ),
+  pre: ({ children }) => (
+    <pre className="my-4 overflow-x-auto rounded-lg bg-slate-950 p-4 text-sm leading-6 text-slate-100 [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-inherit">
+      {children}
+    </pre>
+  ),
+  table: ({ children }) => <table className="my-4 block w-full overflow-x-auto border-collapse text-left text-sm">{children}</table>,
+  th: ({ children }) => <th className="border border-slate-300 bg-slate-100 px-3 py-2 font-semibold text-slate-950">{children}</th>,
+  td: ({ children }) => <td className="border border-slate-300 px-3 py-2 align-top">{children}</td>,
+  hr: () => <hr className="my-5 border-slate-200" />,
+};
 const suggestedActions = [
   {
     title: "หาคนทาสีบ้าน",
@@ -109,7 +144,13 @@ export function AiMatchPanel() {
             }
             key={message.id}
           >
-            <p className="whitespace-pre-wrap text-sm leading-7">{message.content}</p>
+            {message.role === "assistant" ? (
+              <ReactMarkdown components={markdownComponents} remarkPlugins={[remarkGfm]}>
+                {message.content}
+              </ReactMarkdown>
+            ) : (
+              <p className="whitespace-pre-wrap text-sm leading-7">{message.content}</p>
+            )}
           </article>
         ))}
 
